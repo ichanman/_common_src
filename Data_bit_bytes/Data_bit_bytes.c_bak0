@@ -1,0 +1,80 @@
+/*
+ * bitNBytes.c
+ *
+ *  Created on: Apr 1, 2017
+ *      Author: Lenovo
+ */
+
+#include "Data_bit_bytes.h"
+
+int bitToBytes(const uint16_t bit[], const uint8_t sizeBits,
+		unsigned char bytes[], const uint8_t sizeBytes)
+//int bitToBytes(const uint8_t bit[], unsigned char bytes[])
+{
+	//int j = 0;
+//	for(j=0;j<100;j++){
+//		if(!(0==bit[j]||(1==bit[j]))){
+//			printf("detected non binary at %d\n",j);
+//			break;
+//		}
+//		printf("%d",bit[j]);
+//	}
+	printf("\n");
+	if((sizeBytes * 8) < sizeBits){
+		printf("Not enough bytes size\n");
+		return -1;
+	}
+	int b;
+	//unsigned char bytes[size/8];
+
+	//printf("sizeofbit: %d\n",sizeBits);
+	//printf("sizeofbytes: %d\n",sizeof(bytes));
+	//printf("%04X\n",bytes);
+	memset(bytes,0,2);
+	for(b=0;b<sizeBits;b++){
+		bytes[b/8] = (bytes[b/8] | ((bit[b]?1:0)<<(7-(b%8))));
+//		printf("b=%d\n",b);
+//		printf("bit=%d\n",bit[b]);
+//		printf("%X\n",bytes[b/8]);
+	}
+//	printf("res %X\n",bytes[0]);
+//	printf("res %X\n",bytes[1]);
+	return 0;
+}
+c_byteArray c_bitToBytes(c_bitArray bitArray)
+{
+	c_byteArray res;
+	res.size = (bitArray.size) / 8;
+
+	int b;
+
+	memset(res.bytes,0,res.size);
+
+
+	for(b=0;b<bitArray.size;b++){
+		//bytes[b/8] = (bytes[b/8] | ((bit[b]?1:0)<<(7-(b%8))));
+		res.bytes[b/8] = (res.bytes[b/8] | ((bitArray.bit[b]?1:0)<<(7-(b%8))));
+//		printf("b=%d\n",b);
+//		printf("bit=%d\n",bit[b]);
+//		printf("%X\n",bytes[b/8]);
+	}
+//	printf("res %X\n",bytes[0]);
+//	printf("res %X\n",bytes[1]);
+	return res;
+}
+int bytesTobits(const unsigned char * bytes, const uint8_t sizeBytes,
+		uint8_t * ArrBit, const uint8_t sizeBits){
+	int i,b;
+	for(i=0;i<sizeBytes;i++){
+		//printf("%X\n",bytes[i]);
+		for(b=0;b<8;b++){
+
+			//ArrBit[(i*8) + b] = bytes[i]&(1<<b);
+			ArrBit[(i*8) + b] = (bytes[i]>>b) & 1;
+			//printf("%d",ArrBit[(i*8) + b]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+	return 0;
+}
