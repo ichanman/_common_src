@@ -1,0 +1,5 @@
+Program untuk komunikasi program YCOM server yang terpisah dari program utama
+
+
+
+ Ycom Program -------- IPC neutrino -------> Main Program
